@@ -1,0 +1,92 @@
+Cube of size 1: 
+Even sets: 1 
+Odd sets: 2 
+Sets of size 0: 1 
+Sets of size 1: 2
+
+Cube of size 2: 
+Even sets: 3 
+Odd sets: 4 
+Sets of size 0: 1 
+Sets of size 1: 4 
+Sets of size 2: 2 
+
+Cube of size 3: 
+Even sets: 19 
+Odd sets: 16 
+Sets of size 0: 1 
+Sets of size 1: 8 
+Sets of size 2: 16 
+Sets of size 3: 8 
+Sets of size 4: 2 
+
+Cube of size 4: 
+Even sets: 375 
+Odd sets: 368 
+Sets of size 0: 1 
+Sets of size 1: 16 
+Sets of size 2: 88 
+Sets of size 3: 208 
+Sets of size 4: 228 
+Sets of size 5: 128 
+Sets of size 6: 56 
+Sets of size 7: 16 
+Sets of size 8: 2 
+
+Cube of size 5: 
+Even sets: 127243 
+Odd sets: 127232 
+Sets of size 0: 1 
+Sets of size 1: 32 
+Sets of size 2: 416 
+Sets of size 3: 2880 
+Sets of size 4: 11760 
+Sets of size 5: 29856 
+Sets of size 6: 48960 
+Sets of size 7: 54304 
+Sets of size 8: 44240 
+Sets of size 9: 29920 
+Sets of size 10: 17952 
+Sets of size 11: 9088 
+Sets of size 12: 3672 
+Sets of size 13: 1120 
+Sets of size 14: 240 
+Sets of size 15: 32 
+Sets of size 16: 2 
+
+Cube of size 6:
+Even sets: 9884416143
+Odd sets:  9884416000
+Sets of size 0: 1
+Sets of size 1: 64
+Sets of size 2: 1824
+Sets of size 3: 30720
+Sets of size 4: 342400
+Sets of size 5: 2682432
+Sets of size 6: 15328064
+Sets of size 7: 65515840
+Sets of size 8: 213464240
+Sets of size 9: 538811200
+Sets of size 10: 1070860384
+Sets of size 11: 1708551424
+Sets of size 12: 2245780976
+Sets of size 13: 2517976640
+Sets of size 14: 2509047680
+Sets of size 15: 2303873920
+Sets of size 16: 1984338932
+Sets of size 17: 1599152320
+Sets of size 18: 1191211520
+Sets of size 19: 810028480
+Sets of size 20: 497602544
+Sets of size 21: 273562688
+Sets of size 22: 133347136
+Sets of size 23: 57064960
+Sets of size 24: 21203480
+Sets of size 25: 6752512
+Sets of size 26: 1814048
+Sets of size 27: 402816
+Sets of size 28: 71920
+Sets of size 29: 9920
+Sets of size 30: 992
+Sets of size 31: 64
+Sets of size 32: 2 

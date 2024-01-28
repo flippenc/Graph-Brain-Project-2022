@@ -1,0 +1,100 @@
+A354082
+A355558
+A355559
+
+A354802
+A355226
+A355227
+
+The independence polynomial of the halved n-cube graph evaluated at -1.
+1   2   3   4   5     6      7        8
+0, -1, -3, -3, 25, -135, -2079, 1879969
+
+Irregular triangle read by rows where T(n,k) is the number of independent sets of size k in the n-halved cube graph.
+
+The independence number alpha(G) of a graph is the cardinality of the largest independent vertex set. The n-halved graph has alpha(G) = A005864(n). The independence polynomial for the n-halved cube is given by Sum_{k=0..alpha(G)} T(n,k)*t^k.
+
+Since 0 <= k <= alpha(G), row n has length A005864(n) + 1.
+
+(Rows 1-8)
+
+1, 1, 1, 2, 1, 4, 1, 8, 4, 1, 16, 40, 1, 32, 256, 480, 120, 1, 64, 1344, 11200, 36400, 40320, 13440, 1920, 240, 1, 128, 6336, 156800, 2104480, 15644160, 63672000, 136970880, 147748560, 76396800, 21087360, 4273920, 840000, 161280, 28800, 3840, 240
+
+Triangle begins:
+n = 1: 1, 1
+n = 2: 1, 2
+n = 3: 1, 4
+n = 4: 1, 8, 4
+n = 5: 1, 16, 40
+The 4-halved cube graph has independence polynomial 1 + 8*t + 4*t^2.
+
+
+The independence polynomial of the folded n-cube graph evaluated at -1.
+ 2   3   4  5    6    7      8
+-1, -3, -1, 9, 131, 253, 25607
+
+Irregular triangle read by rows where T(n,k) is the number of independent sets of size k in the n-folded cube graph.
+
+The independence number alpha(G) of a graph is the cardinality of the largest independent vertex set. The n-folded graph has alpha(G) = A058622(n-1). The independence polynomial for the n-folded cube is given by Sum_{k=0..alpha(G)} T(n,k)*t^k.
+
+Since 0 <= k <= alpha(G), row n has length A058622(n-1) + 1.
+
+offset: n = 2
+
+1, 2, 1, 4, 1, 8, 12, 8, 2, 1, 16, 80, 160, 120, 16, 1, 32, 400, 2560, 9280, 20256, 28960, 31520, 29880, 24320, 16336, 8768, 3640, 1120, 240, 32, 2, 1, 64, 1792, 29120, 307440, 2239552, 11682944, 44769920, 128380880, 279211520, 464621248, 593908224, 582529360, 435648640, 245610720, 102886976, 31658620, 7189056, 1239840, 165760, 17584, 1408, 64
+
+Triangle begins:
+n = 2: 1, 2
+n = 3: 1, 4
+n = 4: 1, 8, 12, 8, 2
+n = 5: 1, 16, 80, 160, 120, 16
+The 4-folded cube graph has independence polynomial 1 + 16*t + 80*t^2 + 160*t^3 + 120*t^4 + 16*t^5
+
+Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/IndependencePolynomial.html">Independence polynomial</a>
+
+Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/FoldedCubeGraph.html">Folded cube graph</a>
+
+Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/HalvedCubeGraph.html">Halved cube graph</a>
+
+
+
+
+
+
+
+[0,1,1,1,2,2,4,8,16,20,40,72,144,256,512,1024,2048]
+
+screen /usr/local/sage-9.4/sage foldedCoeff.sage
+
+from sage.graphs.connectivity import connected_components
+def recurse(g):
+    if g.order() == 0:
+            return 1
+    comp = g.connected_components()
+    if len(comp[-1]) == 1:
+        return 0
+    elif len(comp) > 1:
+        prod = 1
+        for c in comp:
+            if prod == 0:
+                return 0
+            else:
+                prod = prod*recurse(g.subgraph(vertices=c))
+        return prod
+    min_degree_vertex = g.vertices()[0]
+    for v in g.vertices():
+        if g.degree(v) < g.degree(min_degree_vertex):
+            min_degree_vertex = v
+    to_remove_edge =  g.edges_incident(min_degree_vertex)[0]
+    to_remove_vertices = [to_remove_edge[0], to_remove_edge[1]]
+    to_remove_vertices.extend(g.neighbors(to_remove_edge[0]))
+    to_remove_vertices.extend(g.neighbors(to_remove_edge[1]))
+    to_remove_vertices = list(set(to_remove_vertices))
+    without_neighborhoods = copy(g)
+    without_edge = copy(g)
+    without_neighborhoods.delete_vertices(to_remove_vertices)
+    without_edge.delete_edge(to_remove_edge)
+    return recurse(without_edge) - recurse(without_neighborhoods)
+
+def a(n):
+    return recurse(graphs.FoldedCube(n))

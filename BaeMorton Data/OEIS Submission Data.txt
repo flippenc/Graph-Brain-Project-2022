@@ -1,0 +1,150 @@
+A354082
+A355558
+A355559
+
+A354802
+A355226
+A355227
+
+The Independence Polynomial of the n-dimensional cube graph evaluated at -1
+The Independence Polynomial of the n-dimensional folded cube graph evaluated at -1
+The Independence Polynomial of the n-dimensional halved cube graph evaluated at -1
+
+The independence polynomial evaluated at -1 is denoted I(G, -1) and has uses in both knot theory and graph theory. Levit and Mandrescu proved a relation between |I(G, -1)| and the decycling number of a graph. This relation was proven to be sharp by Cutler and Kahl. Within knot theory, Bae and Morton used I(G, -1) to study the spread and extreme values of Jones polynomials.
+
+It appears that this sequence remains positive for n>3.
+
+
+
+~The independence polynomial of the n-hypercube graph evaluated at -1
+
+
+~Y. Bae and H.R.Morton, The spread and extreme terms of Jones polynomials, Journal of Knot Theory and Its Ramifications, 2001, 359-373.
+
+V. Levit and E. Mandrescu, A simple proof of an inequality connecting the alternating number of independent sets and the decycling number, Discrete Math, 2011, 1204-1206.
+
+J. Cutler and N. Kahl, A note on the values of independence polynomials at -1, Discrete Mathematics, 2016, 2723-2726.
+
+
+
+~ The 5-hypercube graph graph has a(5) = 11
+
+
+~ Wolfram MathWorld,<a href="https://mathworld.wolfram.com/HypercubeGraph.html">Hypercube_graph</a>
+
+
+https://mathworld.wolfram.com/HypercubeGraph.html
+Hypercube of dimension n
+a(1) = -1
+a(2) = -1
+a(3) = 3
+a(4) = 7
+a(5) = 11
+a(6) = 143
+a(7) = 7715
+
+https://mathworld.wolfram.com/FoldedCubeGraph.html
+Folded Cube of dimension n
+a(1) = -1
+a(2) = -1
+a(3) = -3
+a(4) = -1
+a(5) = 9
+a(6) = 131
+a(7) = 253
+a(8) = 25607
+
+https://mathworld.wolfram.com/HalvedCubeGraph.html
+Half Cube of dimension n
+a(1) = -1
+a(2) = -1
+a(3) = -3
+a(4) = -3
+a(5) = 25
+a(6) = -135
+a(7) = -2079
+a(8) = 1679969
+
+(SAGE) from sage.graphs.connectivity import connected_components
+def a(g):
+    # first stopping condition (check for empty graph)
+    if g.order() == 0:
+            return 1
+    comp = g.connected_components()
+    if len(comp[-1]) == 1:
+        return 0
+    elif len(comp) > 1:
+        prod = 1
+        for c in comp:
+            if prod == 0:
+                return 0
+            else:
+                prod = prod*bae_morton(g.subgraph(vertices=c))
+        return prod
+    min_degree_vertex = g.vertices()[0]
+    for v in g.vertices():
+        if g.degree(v) < g.degree(min_degree_vertex):
+            min_degree_vertex = v
+    to_remove_edge =  g.edges_incident(min_degree_vertex)[0]
+    to_remove_vertices =[to_remove_edge[0], to_remove_edge[1]]
+    to_remove_vertices.extend(g.neighbors(to_remove_edge[0]))
+    to_remove_vertices.extend(g.neighbors(to_remove_edge[1]))
+    to_remove_vertices = list(set(to_remove_vertices))
+    without_neighborhoods = copy(g)
+    without_edge = copy(g)
+    without_neighborhoods.delete_vertices(to_remove_vertices)
+    without_edge.delete_edge(to_remove_edge)
+    return a(without_edge) - a(without_neighborhoods)
+for n in range(2,9):
+    print(a(graphs.CubeGraph(n))
+
+
+I(Q1, t) = 1 + 2*t
+I(Q2, t) = 1 + 4*t + 2*t^2
+I(Q3, t) = 1 + 8*t + 16*t^2 + 8*t^3 + 2*t^4
+I(Q4, t) = 2*t^8 + 16*t^7 + 56*t^6 + 128*t^5 + 228*t^4 + 208*t^3 + 88*t^2 + 16*t + 1
+I(Q5, t) = 2*t^16 + 32*t^15 + 240*t^14 + 1120*t^13 + 3672*t^12 + 9088*t^11 + 17952*t^10 + 29920*t^9 + 44240*t^8 + 54304*t^7 + 48960*t^6 + 29856*t^5 + 11760*t^4 + 2880*t^3 + 416*t^2 + 32*t + 1
+I(Q6, t) = 2*t^32 + 64*t^31 + 992*t^30 + 9920*t^29 + 71920*t^28 + 402816*t^27 + 1814048*t^26 + 6752512*t^25 + 21203480*t^24 + 57064960*t^23 + 133347136*t^22 + 273562688*t^21 + 497602544*t^20 + 810028480*t^19 + 1191211520*t^18 + 1599152320*t^17 + 1984338932*t^16 + 2303873920*t^15 + 2509047680*t^14 + 2517976640*t^13 + 2245780976*t^12 + 1708551424*t^11 + 1070860384*t^10 + 538811200*t^9 + 213464240*t^8 + 65515840*t^7 + 15328064*t^6 + 2682432*t^5 + 342400*t^4 + 30720*t^3 + 1824*t^2 + 64*t^1 + 1
+
+2^(n-1) + 1
+
+I(Q1, t) = 1, 2
+I(Q2, t) = 1, 4, 2
+I(Q3, t) = 1, 8, 16, 8, 2
+I(Q4, t) = 1, 16, 88, 208, 228, 128, 56, 16, 2
+I(Q5, t) = 1, 32, 416, 2880, 11760, 29856, 48960, 54304, 44240, 29920, 17952, 9088, 3672, 1120, 240, 32, 2
+I(Q6, t) = 1, 64, 1824, 30720, 342400, 2682432, 15328064, 65515840, 213464240, 538811200, 1070860384, 1708551424, 2245780976, 2517976640, 2509047680, 2303873920, 1984338932, 1599152320, 1191211520, 810028480, 497602544, 273562688, 133347136, 57064960, 21203480, 6752512, 1814048, 402816, 71920, 9920, 992, 64, 2
+
+1, 1, 1, 2, 1, 4, 2, 1, 8, 16, 8, 2, 1, 16, 88, 208, 228, 128, 56, 16, 2, 1, 32, 416, 2880, 11760, 29856, 48960, 54304, 44240, 29920, 17952, 9088, 3672, 1120, 240, 32, 2, 1, 64, 1824, 30720, 342400, 2682432, 15328064, 65515840, 213464240, 538811200, 1070860384, 1708551424, 2245780976, 2517976640, 2509047680, 2303873920, 1984338932, 1599152320, 1191211520, 810028480, 497602544, 273562688, 133347136, 57064960, 21203480, 6752512, 1814048, 402816, 71920, 9920, 992, 64, 2
+
+Title: Coefficients of the independence polynomial of the n-hypercube graph.
+Offset: 1
+
+Results of certain size:
+https://arxiv.org/pdf/2106.09709.pdf
+
+Results about number of independent sets in Qn:
+Asymptoticly increases:
+https://arxiv.org/pdf/1907.00862v2.pdf improved result found by
+A. Korshunov and A. Sapozhenko. The number of binary codes with distance 2. Problemy Kibernet,
+40:111–130, 1983.
+
+Prog: 
+(Sage)
+from sage.graphs.independent_sets import IndependentSets
+def set_counts(g):
+    c = g.complement()
+    max_size = sage.graphs.cliquer.clique_number(c)
+    set_counts = [0] * (max_size + 1)
+    for Iset in IndependentSets(g):
+        set_counts[len(Iset)] += 1
+    print(set_counts)
+for n in range(1,7):
+    set_counter(graphs.CubeGraph(n))
+# Scott Taylor, Jun 2 2022
+
+
+
+Jenssen, Perkins, and Potukuchi studied various asymptotics of the number of independence sets of given sizes. 
+
+M. Jenssen, W. Perkins and A. Potukuchi, Independent sets of a given size and structure in the hypercube, Combinatorics, Probability and Computing, 2022, 1-19, DOI:<a href="https://doi.org/10.1017/S0963548321000559">10.1017/S0963548321000559</a>, arXiv:<a href="https://arxiv.org/abs/1907.00862v3">abs/1907.00862v3</a>.

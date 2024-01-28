@@ -1,0 +1,53 @@
+Cube: starting at n = 2: Q_n = -1,3,7,11,143
+Half-cube: starting at n = 2: Q_n = -1,-3,-3,25,-135,-2079
+SierpinskiGasketGraph starting at n = 1: S_n = -2,0,-2,-296
+S_4 has |E| = 81, |V| = 42, B(S_4) = -296
+
+For |V|=1, highest/lowest B value is 0, achieved by ['@']
+For |V|=2, highest B value is 0, achieved by ['A?'] and lowest B value is -1, achieved by ['A_']
+For |V|=3, highest B value is 0, achieved by ['B?', 'BO'] and lowest B value is -2, achieved by ['Bw']
+For |V|=4, highest B value is 1, achieved by ['CQ'] and lowest B value is -3, achieved by ['C~']
+For |V|=5, highest B value is 2, achieved by ['DQg'] and lowest B value is -4, achieved by ['D~{']
+For |V|=6, highest B value is 4, achieved by ['EQhO'] and lowest B value is -5, achieved by ['E~~w']
+For |V|=7, highest B value is 6, achieved by ['FQhTO'] and lowest B value is -6, achieved by ['F~~~w']
+For |V|=8, highest B value is 9, achieved by ['GQhTQg'] and lowest B value is -7, achieved by ['G~~~~{']
+For |V|=9, highest B value is 12, achieved by ['HQhTQii'] and lowest B value is -8, achieved by ['HCOcaOc', 'H~~~~~~']
+For |V|=10, highest B value is 16, achieved by ['IQhTQiiTO'] and lowest B value is -12, achieved by ['ICOcaOcc_']
+
+4,6,9,12,16,20,25,30,36,54,81,108,144,192,256,320,400,500,729,972,1296,1728,2304,3072,4096,5120,6561,8748,11664,15552,20736,27648,36864,49152,65536,81920,104976,139968,186624,248832,331776,442368,589824,786432,1048576,1310720,1679616
+
+-5,-6,-7,-8,-12,-18,-27,-36,-48,-64,-80,-100,-125,-162,-243,-324,-432,-576,-768,-1024,-1280,-1600,-2187,-2916,-3888,-5184,-6912,-9216,-12288,-16384,-20480,-26244,-34992,-46656,-62208,-82944,-110592,-147456,-196608,-262144,-327680,-419904,-559872,-746496,-995328,-1327104,-1769472
+
+import pickle
+with open('minMaxB.pkl', 'wb') as toPickle:
+	pickle.dump(results, toPickle)
+
+import pickle
+with open('minMaxB.pkl', 'rb') as fromPickle:
+	results = pickle.load(fromPickle)
+maxG6 = results[0]
+minG6 = results[1]
+maxB = results[2]
+minB = results[3]
+
+# from sage.graphs.connectivity import connected_components
+connected_components(G)
+
+5120, 6561, 8748
+
+o = G.order()
+
+B <= -2*d + s -1
+B <= sqrt(((d + 1)^2 - s)^2)
+B <= 4*d*d - 1
+B <= max(2*sqrt(o), (-s)^d)
+B <= -d*d + s
+
+B >= -d + 1
+B >= min(d, -o + s -1)
+B >= 1/4*(i + 1)^2 - 2*o - 2
+B >= 4*d - 9
+B >= -d - 2*o + s
+
+maximizing = ['@', 'A?', 'B?', 'BO', 'CQ', 'DQg', 'EQhO', 'FQhTO', 'GQhTQg', 'HQhTQii', 'IQhTQiiTO']
+minimizing = ['@', 'A_', 'Bw', 'C~', 'D~{', 'E~~w', 'F~~~w', 'G~~~~{', 'HCOcaOc', 'H~~~~~~', 'ICOcaOcc_']
