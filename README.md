@@ -56,19 +56,19 @@
 The naive ways to compute the Bae-Morton number for a graph *G* are to
 either compute the independence polynomial and evaluate it at  − 1:
 $$\beta_M(G) = I(-1) = \sum\_{k=0}^{\alpha(G)} a_k(-1)^k$$
-or to find the collection 𝒞 of every independent set in *G* and take the
+or to find the collection $\mathcal{C}$ of every independent set in *G* and take the
 following sum:
-*β*<sub>*M*</sub>(*G*) = ∑<sub>*C* ∈ 𝒞</sub>(−1)<sup>\|*C*\|</sup>.
+$$\beta_M(G) = \sum_{C \in \mathcal{C}}(-1)^{|C|}.$$
 Both of these methods are very inefficient for general graphs since even
 determining the size of a maximum size independent set in a general
 graph is known to be an NP-hard problem. Other students in this research
 project found more efficient recursive formulas for computing Bae-Morton
 numbers. For a non-cut vertex *v* with neighborhood *N*(*v*), the
 Bae-Morton number satisfies
-*β*<sub>*M*</sub>(*G*) = *β*<sub>*M*</sub>(*G*−{*v*}) − *β*<sub>*M*</sub>(*G*−{*v*∪*N*(*v*)}).
+$$\beta_M(G) = \beta_M(G - \\{v\\}) - \beta_M(G - \\{v \cup N(v)\\}).$$
 For edge *e* with endpoints *u* and *v* (which have neighborhoods
 *N*(*u*) and *N*(*v*)), the Bae-Morton number satisfies
-*β*<sub>*M*</sub>(*G*) = *β*<sub>*M*</sub>(*G*−*e*) − *β*<sub>*M*</sub>(*G*−{*N*(*u*)∪{*u*}∪*N*(*v*)∪{*v*}}).
+$$\beta_M(G) = \beta_M(G - e) - \beta_M(G - \\{ N(u) \cup \\{u\\} \cup N(v) \cup \\{v\\} \\} ).$$
 The file `baeMorton.sage` contains various functions which implement
 these formulas in different ways in order to more quickly compute
 Bae-Morton numbers for general graphs
