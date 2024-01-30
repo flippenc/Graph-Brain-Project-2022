@@ -3,7 +3,7 @@
 **General Research Information:**
 
 -   This research was conducted during the summer of 2022 under the
-    leadership of Drs.Neal Bushaw, Craig Larson, and Allison Moore. This
+    leadership of Drs. Neal Bushaw, Craig Larson, and Allison Moore. This
     research was conducted by a group of undergraduate and graduate
     students in the Math and Computer Science departments at Virginia
     Commonwealth University
