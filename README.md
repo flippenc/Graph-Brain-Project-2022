@@ -19,19 +19,19 @@
 
 -   In graph theory, an independent set is a collection of vertices in a
     graph such that no two vertices in the collection share an edge. The
-    maximum size of an independent set in a graph *G* is the
-    independence number, denoted *α*(*G*). The independence polynomial
-    of a graph *G* is a polynomial *I*(*x*) defined by
+    maximum size of an independent set in a graph $G$ is the
+    independence number, denoted $\alpha(G)$. The independence polynomial
+    of a graph $G$ is the polynomial $I(x)$ defined by
     $$I(x) = \sum\_{k=0}^{\alpha(G)} a_k x^k$$
-    where *a*<sub>*k*</sub> is the number of different independent sets
-    of size *k* in *G*. Notice that we start the sum at *k* = 0 since
+    where $a_k$ is the number of different independent sets
+    of size $k$ in $G$. Notice that we start the sum at $k = 0$ since
     the empty set is a valid independent set
 
 -   One use of the independence polynomial appears in Knot Theory when
     studying the Jones polynomial. In their paper “The Spread and
     Extreme Terms of Jones Polynomials," Bae and Morton examine the
-    invariant *β*<sub>*M*</sub> which is defined by evaluating the
-    independence polynomial of a graph at  − 1. This paper can be found
+    invariant $\beta_M$ which is defined by evaluating the
+    independence polynomial of a graph at $-1$. This paper can be found
     on [arXiv](https://arxiv.org/abs/math/0012089) and is published in
     the [Journal of Knot Theory and Its
     Ramifications](https://www.worldscientific.com/doi/10.1142/S0218216503002512)
@@ -53,21 +53,21 @@
 
 **Computing Bae-Morton Numbers Efficiently**
 
-The naive ways to compute the Bae-Morton number for a graph *G* are to
-either compute the independence polynomial and evaluate it at  − 1:
+The naive ways to compute the Bae-Morton number for a graph $G$ are to
+either compute the independence polynomial and evaluate it at $-1$:
 $$\beta_M(G) = I(-1) = \sum\_{k=0}^{\alpha(G)} a_k(-1)^k$$
-or to find the collection $\mathcal{C}$ of every independent set in *G* and take the
+or to find the collection $\mathcal{C}$ of every independent set in $G$ and take the
 following sum:
 $$\beta_M(G) = \sum_{C \in \mathcal{C}}(-1)^{|C|}.$$
 Both of these methods are very inefficient for general graphs since even
 determining the size of a maximum size independent set in a general
 graph is known to be an NP-hard problem. Other students in this research
 project found more efficient recursive formulas for computing Bae-Morton
-numbers. For a non-cut vertex *v* with neighborhood *N*(*v*), the
+numbers. For a non-cut vertex $v$ with neighborhood $N(v)$, the
 Bae-Morton number satisfies
 $$\beta_M(G) = \beta_M(G - \\{v\\}) - \beta_M(G - \\{v \cup N(v)\\}).$$
-For edge *e* with endpoints *u* and *v* (which have neighborhoods
-*N*(*u*) and *N*(*v*)), the Bae-Morton number satisfies
+For edge $e$ with endpoints $u$ and $v$ (which have neighborhoods
+$N(u)$ and $N(v)$), the Bae-Morton number satisfies
 $$\beta_M(G) = \beta_M(G - e) - \beta_M(G - \\{ N(u) \cup \\{u\\} \cup N(v) \cup \\{v\\} \\} ).$$
 The file `baeMorton.sage` contains various functions which implement
 these formulas in different ways in order to more quickly compute
@@ -118,22 +118,22 @@ sequences that we found were not yet in the OEIS, so I submitted our
 results and they are now in the OEIS as the following sequences:
 
 -   [A354802](https://oeis.org/A354802): Irregular triangle read by rows
-    where *T*(*n*,*k*) is the number of independent sets of size *k* in
-    the *n*-hypercube graph
+    where $T(n,k)$ is the number of independent sets of size $k$ in
+    the $n$-hypercube graph
 
 -   [A355226](https://oeis.org/A355226): Irregular triangle read by rows
-    where *T*(*n*,*k*) is the number of independent sets of size *k* in
+    where $T(n,k)$ is the number of independent sets of size $k$ in
     the *n*-halved cube graph
 
 -   [A355227](https://oeis.org/A355227): Irregular triangle read by rows
-    where *T*(*n*,*k*) is the number of independent sets of size *k* in
-    the *n*-folded cube graph
+    where $T(n,k)$ is the number of independent sets of size $k$ in
+    the $n$-folded cube graph
 
 -   [A355558](https://oeis.org/A355558): The independence polynomial of
-    the *n*-halved cube graph evaluated at  − 1
+    the $n$-halved cube graph evaluated at $-1$
 
 -   [A355559](https://oeis.org/A355559): The independence polynomial of
-    the *n*-folded cube graph evaluated at -1
+    the $n$-folded cube graph evaluated at $-1$
 
 -   [A354082](https://oeis.org/A354082): The independence polynomial of
-    the *n*-hypercube evaluated at  − 1
+    the $n$-hypercube evaluated at $-1$
