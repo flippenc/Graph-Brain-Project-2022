@@ -123,7 +123,7 @@ results and they are now in the OEIS as the following sequences:
 
 -   [A355226](https://oeis.org/A355226): Irregular triangle read by rows
     where $T(n,k)$ is the number of independent sets of size $k$ in
-    the *n*-halved cube graph
+    the $n$-halved cube graph
 
 -   [A355227](https://oeis.org/A355227): Irregular triangle read by rows
     where $T(n,k)$ is the number of independent sets of size $k$ in
